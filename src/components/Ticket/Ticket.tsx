@@ -67,7 +67,7 @@ const Ticket = () => {
                 <section className={cx("resultContainer")}>
                     <div className={cx("resultText")}>{resultText}</div>
                     <div
-                        className={cx("button", "resetButton")}
+                        className={cx("button", "restartButton")}
                         onClick={handleRestart}
                     >
                         Заново
@@ -77,23 +77,22 @@ const Ticket = () => {
                 <section className={cx("ticket")}>
                     <div className={cx("topButtons")}>
                         <div
-                            className={cx("button", "magicWandButton")}
+                            title="Случайно"
+                            className={cx("button", "icon", "magicWandButton")}
                             onClick={handleRandomFill}
                         />
                         <div
-                            className={cx("button", "cheatButton")}
+                            title="Читерство"
+                            className={cx("button", "icon", "cheatButton")}
                             onClick={handleCheat}
-                        >
-                            Чит
-                        </div>
+                        />
                         <div
-                            className={cx("button", "resetButton", {
+                            title="Заново"
+                            className={cx("button", "icon", "resetButton", {
                                 disabled: !isSomeSelected
                             })}
                             onClick={handleReset}
-                        >
-                            Сброс
-                        </div>
+                        />
                     </div>
                     <Field
                         title="Поле 1"

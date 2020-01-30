@@ -60,15 +60,26 @@
 .topButtons .button,
 .resetButton {
     border-radius: 10px;
-    width: 65px;
-    height: 28px;
+    width: 40px;
+    height: 40px;
 }
 
-.magicWandButton {
-    background-image: url("../../assets//icons//magic-wand.svg");
+.button.icon {
     background-repeat: no-repeat;
     background-position: center;
     margin-right: 10px;
+}
+
+.resetButton {
+    background-image: url("../../assets/icons/reset.svg");
+}
+
+.magicWandButton {
+    background-image: url("../../assets/icons/done-all.svg");
+}
+
+.cheatButton {
+    background-image: url("../../assets/icons/cheat.svg");
 }
 
 .resultButton {
@@ -80,6 +91,8 @@
     opacity: 0.64;
 }
 
-.cheatButton {
-    margin-right: 10px;
+.restartButton {
+    border-radius: 10px;
+    width: 120px;
+    height: 30px;
 }
