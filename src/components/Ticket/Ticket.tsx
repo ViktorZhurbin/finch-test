@@ -1,10 +1,13 @@
 import React, { useState } from "react";
+import classNames from "classnames/bind";
 
 import styles from "./Ticket.module.css";
 
 import { Field } from "../Field";
 import { FIELD_ONE_NUMBERS, WIN_TEXT, LOOSE_TEXT } from "../../const";
 import { checkResult, getResults } from "../../helpers";
+
+const cx = classNames.bind(styles);
 
 const Ticket = () => {
     const [isWin, setIsWin] = useState(false);
@@ -44,32 +47,40 @@ const Ticket = () => {
     const resultText = isWin ? WIN_TEXT : LOOSE_TEXT;
     const isAllSelected =
         selectedFieldOne.length === 8 && selectedFieldTwo.length === 1;
+    const isSomeSelected = selectedFieldOne.length || selectedFieldTwo.length;
 
     return (
         <div
-            className={`${styles.container} ${
-                isSubmitted ? styles.ticketHidden : styles.resultsHidden
-            }`}
+            className={cx("container", {
+                ticketHidden: isSubmitted,
+                resultsHidden: !isSubmitted
+            })}
         >
-            <header className={styles.header}>Билет 1</header>
+            <header className={cx("header")}>Билет 1</header>
             {isSubmitted ? (
-                <section className={styles.resultContainer}>
-                    <div className={styles.resultText}>{resultText}</div>
-                    <div className={styles.resetButton} onClick={handleRestart}>
+                <section className={cx("resultContainer")}>
+                    <div className={cx("resultText")}>{resultText}</div>
+                    <div
+                        className={cx("button", "resetButton")}
+                        onClick={handleRestart}
+                    >
                         Заново
                     </div>
                 </section>
             ) : (
-                <section className={styles.ticket}>
-                    <div className={styles.topButtons}>
+                <section className={cx("ticket")}>
+                    <div className={cx("topButtons")}>
+                        <div className={cx("button", "magicWandButton")} />
                         <div
-                            className={styles.cheatButton}
+                            className={cx("button", "cheatButton")}
                             onClick={handleCheat}
                         >
                             Чит
                         </div>
                         <div
-                            className={styles.resetButton}
+                            className={cx("button", "resetButton", {
+                                disabled: !isSomeSelected
+                            })}
                             onClick={handleReset}
                         >
                             Сброс
@@ -90,9 +101,9 @@ const Ticket = () => {
                         setSelected={setSelectedFieldTwo}
                     />
                     <div
-                        className={`${styles.resultButton} ${
-                            isAllSelected ? "" : styles.disabled
-                        }`}
+                        className={cx("button", "resultButton", {
+                            disabled: !isAllSelected
+                        })}
                         onClick={isAllSelected ? handleCheckResult : () => null}
                     >
                         Показать результат

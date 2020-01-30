@@ -34,9 +34,7 @@
     margin-bottom: 26px;
 }
 
-.cheatButton,
-.resultButton,
-.resetButton {
+.button {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -46,16 +44,7 @@
     user-select: none;
 }
 
-.resultButton {
-    align-self: center;
-    border-radius: 40px;
-    width: 178px;
-    height: 48px;
-    margin-top: 19px;
-    opacity: 0.64;
-}
-
-.resultButton.disabled {
+.button.disabled {
     opacity: 1;
     color: rgba(0, 0, 0, 0.25);
     background-color: #f5f5f5;
@@ -68,11 +57,27 @@
     justify-content: flex-end;
 }
 
-.cheatButton,
+.topButtons .button,
 .resetButton {
     border-radius: 10px;
-    width: 100px;
+    width: 65px;
     height: 28px;
+}
+
+.magicWandButton {
+    background-image: url("../../assets//icons//magic-wand.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-right: 10px;
+}
+
+.resultButton {
+    align-self: center;
+    border-radius: 40px;
+    width: 178px;
+    height: 48px;
+    margin-top: 19px;
+    opacity: 0.64;
 }
 
 .cheatButton {
