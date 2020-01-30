@@ -1,0 +1,30 @@
+.container {
+    margin-top: 12px;
+    margin-bottom: 4px;
+}
+
+.header {
+    display: flex;
+}
+
+.title,
+.hint {
+    margin: 0;
+}
+
+.title {
+    margin-right: 10px;
+    font-size: 14px;
+}
+
+.hint {
+    font-weight: 300;
+    font-size: 14px;
+}
+
+.field {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}

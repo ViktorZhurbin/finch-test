@@ -1,0 +1,80 @@
+.container {
+    width: 100%;
+    max-width: 782px;
+    display: flex;
+    flex-direction: column;
+    padding: 14px 11px 24px;
+    min-height: 437px;
+    background-color: white;
+    border-radius: 4px;
+}
+
+.container.ticketHidden {
+    align-items: center;
+}
+
+.ticket {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    margin-bottom: 12px;
+}
+
+.resultContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.resultText {
+    font-weight: 300;
+    font-size: 14px;
+    margin-bottom: 26px;
+}
+
+.cheatButton,
+.resultButton,
+.resetButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    border: 1px solid rgba(0, 0, 0, 0.16);
+    cursor: pointer;
+    user-select: none;
+}
+
+.resultButton {
+    align-self: center;
+    border-radius: 40px;
+    width: 178px;
+    height: 48px;
+    margin-top: 19px;
+    opacity: 0.64;
+}
+
+.resultButton.disabled {
+    opacity: 1;
+    color: rgba(0, 0, 0, 0.25);
+    background-color: #f5f5f5;
+    border-color: #d9d9d9;
+    cursor: not-allowed;
+}
+
+.topButtons {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.cheatButton,
+.resetButton {
+    border-radius: 10px;
+    width: 100px;
+    height: 28px;
+}
+
+.cheatButton {
+    margin-right: 10px;
+}
