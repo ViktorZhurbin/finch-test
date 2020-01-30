@@ -34,6 +34,12 @@ const Ticket = () => {
         setSelectedFieldTwo(resultTwo);
     };
 
+    const handleRandomFill = () => {
+        const [resultOne, resultTwo] = getResults();
+        setSelectedFieldOne(resultOne);
+        setSelectedFieldTwo(resultTwo);
+    };
+
     const handleReset = () => {
         setSelectedFieldOne([]);
         setSelectedFieldTwo([]);
@@ -70,7 +76,10 @@ const Ticket = () => {
             ) : (
                 <section className={cx("ticket")}>
                     <div className={cx("topButtons")}>
-                        <div className={cx("button", "magicWandButton")} />
+                        <div
+                            className={cx("button", "magicWandButton")}
+                            onClick={handleRandomFill}
+                        />
                         <div
                             className={cx("button", "cheatButton")}
                             onClick={handleCheat}
