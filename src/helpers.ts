@@ -55,8 +55,13 @@ export const getResults = (): [number[], number[]] => {
 
 export const checkResult = (
     selectedFieldOne: number[],
-    selectedFieldTwo: number[]
+    selectedFieldTwo: number[],
+    isCheat?: boolean
 ) => {
+    if (isCheat) {
+        return true;
+    }
+
     const [resultOne, resultTwo] = getResults();
     const correctCountOne = getCorrectCount(selectedFieldOne, resultOne);
     const correctCountTwo = getCorrectCount(selectedFieldTwo, resultTwo);

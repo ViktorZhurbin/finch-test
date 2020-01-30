@@ -7,19 +7,25 @@ import { FIELD_ONE_NUMBERS, WIN_TEXT, LOOSE_TEXT } from "../../const";
 import { checkResult, getResults } from "../../helpers";
 
 const Ticket = () => {
-    const [isWin, setIsWin] = useState();
+    const [isWin, setIsWin] = useState(false);
+    const [isCheat, setIsCheat] = useState(false);
     const [isSubmitted, setIsSubmited] = useState(false);
     const [selectedFieldOne, setSelectedFieldOne] = useState<number[]>([]);
     const [selectedFieldTwo, setSelectedFieldTwo] = useState<number[]>([]);
 
     const handleCheckResult = () => {
-        const isWinResult = checkResult(selectedFieldOne, selectedFieldTwo);
+        const isWinResult = checkResult(
+            selectedFieldOne,
+            selectedFieldTwo,
+            isCheat
+        );
 
         setIsWin(isWinResult);
         setIsSubmited(true);
     };
 
     const handleCheat = () => {
+        setIsCheat(true);
         const [resultOne, resultTwo] = getResults();
         setSelectedFieldOne(resultOne);
         setSelectedFieldTwo(resultTwo);
