@@ -4,9 +4,13 @@ import classNames from 'classnames/bind';
 import styles from './Ticket.module.css';
 
 import { Field } from '../Field';
-import { FIELD_ONE_NUMBERS, WIN_TEXT, LOOSE_TEXT } from '../../const';
-import { checkResult, getResults } from '../../helpers';
-import { fetchResponse } from '../../api';
+import {
+    FIELD_ONE_NUMBERS,
+    FIELD_ONE_REQUIRED_COUNT,
+    FIELD_TWO_REQUIRED_COUNT,
+    WIN_TEXT,
+    LOOSE_TEXT,
+} from '../../const';
 
 const cx = classNames.bind(styles);
 
@@ -65,7 +69,8 @@ const Ticket = () => {
 
     const resultText = isWin ? WIN_TEXT : LOOSE_TEXT;
     const isAllSelected =
-        selectedFieldOne.length === 8 && selectedFieldTwo.length === 1;
+        selectedFieldOne.length === FIELD_ONE_REQUIRED_COUNT &&
+        selectedFieldTwo.length === FIELD_TWO_REQUIRED_COUNT;
     const isSomeSelected = selectedFieldOne.length || selectedFieldTwo.length;
 
     return (
@@ -109,14 +114,14 @@ const Ticket = () => {
                     </div>
                     <Field
                         title="Поле 1"
-                        numSelect={8}
+                            numSelect={FIELD_ONE_REQUIRED_COUNT}
                         numArray={FIELD_ONE_NUMBERS}
                         selected={selectedFieldOne}
                         setSelected={setSelectedFieldOne}
                     />
                     <Field
                         title="Поле 2"
-                        numSelect={1}
+                            numSelect={FIELD_TWO_REQUIRED_COUNT}
                         numArray={[1, 2]}
                         selected={selectedFieldTwo}
                         setSelected={setSelectedFieldTwo}
