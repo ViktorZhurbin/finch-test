@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import classNames from "classnames/bind";
+import React, { useState } from 'react';
+import classNames from 'classnames/bind';
 
-import styles from "./Ticket.module.css";
+import styles from './Ticket.module.css';
 
-import { Field } from "../Field";
-import { FIELD_ONE_NUMBERS, WIN_TEXT, LOOSE_TEXT } from "../../const";
-import { checkResult, getResults } from "../../helpers";
-import { fetchResponse } from "../../api";
+import { Field } from '../Field';
+import { FIELD_ONE_NUMBERS, WIN_TEXT, LOOSE_TEXT } from '../../const';
+import { checkResult, getResults } from '../../helpers';
+import { fetchResponse } from '../../api';
 
 const cx = classNames.bind(styles);
 
@@ -70,38 +70,38 @@ const Ticket = () => {
 
     return (
         <div
-            className={cx("container", {
+            className={cx('container', {
                 ticketHidden: isSubmitted,
                 resultsHidden: !isSubmitted
             })}
         >
-            <header className={cx("header")}>Билет 1</header>
+            <header className={cx('header')}>Билет 1</header>
             {isSubmitted ? (
-                <section className={cx("resultContainer")}>
-                    <div className={cx("resultText")}>{resultText}</div>
+                <section className={cx('resultContainer')}>
+                    <div className={cx('resultText')}>{resultText}</div>
                     <div
-                        className={cx("button", "restartButton")}
+                        className={cx('button', 'restartButton')}
                         onClick={handleRestart}
                     >
                         Заново
                     </div>
                 </section>
             ) : (
-                <section className={cx("ticket")}>
-                    <div className={cx("topButtons")}>
+                <section className={cx('ticket')}>
+                    <div className={cx('topButtons')}>
                         <div
                             title="Случайно"
-                            className={cx("button", "icon", "magicWandButton")}
+                            className={cx('button', 'icon', 'magicWandButton')}
                             onClick={handleRandomFill}
                         />
                         <div
                             title="Читерство"
-                            className={cx("button", "icon", "cheatButton")}
+                            className={cx('button', 'icon', 'cheatButton')}
                             onClick={handleCheat}
                         />
                         <div
                             title="Заново"
-                            className={cx("button", "icon", "resetButton", {
+                            className={cx('button', 'icon', 'resetButton', {
                                 disabled: !isSomeSelected
                             })}
                             onClick={handleReset}
@@ -122,7 +122,7 @@ const Ticket = () => {
                         setSelected={setSelectedFieldTwo}
                     />
                     <div
-                        className={cx("button", "resultButton", {
+                        className={cx('button', 'resultButton', {
                             disabled: !isAllSelected
                         })}
                         onClick={isAllSelected ? handleCheckResult : () => null}

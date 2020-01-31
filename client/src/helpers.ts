@@ -26,14 +26,14 @@ export const inflectFieldNumber = (num: number) => {
     const numString = num.toString();
     const lastNum = numString.slice(numString.length - 1);
     switch (lastNum) {
-        case "1":
-            return "число";
-        case "2":
-        case "3":
-        case "4":
-            return "числа";
+        case '1':
+            return 'число';
+        case '2':
+        case '3':
+        case '4':
+            return 'числа';
         default:
-            return "чисел";
+            return 'чисел';
     }
 };
 

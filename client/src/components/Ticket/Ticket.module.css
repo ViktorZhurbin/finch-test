@@ -71,15 +71,15 @@
 }
 
 .resetButton {
-    background-image: url("../../assets/icons/reset.svg");
+    background-image: url('../../assets/icons/reset.svg');
 }
 
 .magicWandButton {
-    background-image: url("../../assets/icons/done-all.svg");
+    background-image: url('../../assets/icons/done-all.svg');
 }
 
 .cheatButton {
-    background-image: url("../../assets/icons/cheat.svg");
+    background-image: url('../../assets/icons/cheat.svg');
 }
 
 .resultButton {

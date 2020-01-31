@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 
-import styles from "./FieldItem.module.css";
+import styles from './FieldItem.module.css';
 
 interface FieldItemProps {
     num: number;
@@ -13,13 +13,13 @@ const FieldItem: React.FC<FieldItemProps> = ({ num, isSelected, onClick }) => {
     return (
         <div
             className={`${styles.container} ${
-                isSelected ? styles.selected : ""
+                isSelected ? styles.selected : ''
             }`}
             onClick={handleClick}
         >
             <p
                 className={`${styles.fieldItem} ${
-                    isSelected ? styles.selected : ""
+                    isSelected ? styles.selected : ''
                 }`}
             >
                 {num}

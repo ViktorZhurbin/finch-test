@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import styles from "./Field.module.css";
-import { FieldItem } from "../FieldItem";
-import { inflectFieldNumber } from "../../helpers";
+import styles from './Field.module.css';
+import { FieldItem } from '../FieldItem';
+import { inflectFieldNumber } from '../../helpers';
 
 interface FieldProps {
     title: string;
@@ -25,10 +25,10 @@ const Field: React.FC<FieldProps> = ({
         }
     };
     const removeFieldItem = (num: number) => {
-        const copyWithRemovedNum = selected.filter((item) => item !== num);
+        const copyWithRemovedNum = selected.filter(item => item !== num);
         setSelected(copyWithRemovedNum);
     };
-    const hint = `Отметьте ${selected.length > 0 ? "еще" : ""} ${numSelect -
+    const hint = `Отметьте ${selected.length > 0 ? 'еще' : ''} ${numSelect -
         selected.length} ${inflectFieldNumber(numSelect - selected.length)}`;
 
     return (
@@ -40,7 +40,7 @@ const Field: React.FC<FieldProps> = ({
                 )}
             </header>
             <div className={styles.field}>
-                {numArray.map((num) => {
+                {numArray.map(num => {
                     const isSelected = selected.includes(num);
                     const onClick = isSelected
                         ? () => removeFieldItem(num)
