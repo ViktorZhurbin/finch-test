@@ -45,7 +45,6 @@
 }
 
 .button.disabled {
-    opacity: 1;
     color: rgba(0, 0, 0, 0.25);
     background-color: #f5f5f5;
     border-color: #d9d9d9;
@@ -57,38 +56,13 @@
     justify-content: flex-end;
 }
 
-.topButtons .button,
-.resetButton {
-    border-radius: 10px;
-    width: 40px;
-    height: 40px;
-}
-
-.button.icon {
-    background-repeat: no-repeat;
-    background-position: center;
-    margin-right: 10px;
-}
-
-.resetButton {
-    background-image: url('../../assets/icons/reset.svg');
-}
-
-.magicWandButton {
-    background-image: url('../../assets/icons/done-all.svg');
-}
-
-.cheatButton {
-    background-image: url('../../assets/icons/cheat.svg');
-}
-
 .resultButton {
     align-self: center;
     border-radius: 40px;
     width: 178px;
     height: 48px;
     margin-top: 19px;
-    opacity: 0.64;
+    opacity: 0.8;
 }
 
 .restartButton {

@@ -13,6 +13,7 @@ import {
 } from '../../const';
 import { getResults, checkResultAndPost } from '../../helpers';
 import { Notification } from '../Notification';
+import { ButtonIcon } from '../ButtonIcon';
 
 const cx = classNames.bind(styles);
 
@@ -36,8 +37,8 @@ const Ticket = () => {
             return;
         }
 
-            setIsWin(isTicketWon);
-            setIsSubmited(true);
+        setIsWin(isTicketWon);
+        setIsSubmited(true);
     };
 
     const hideNotification = () => setShowErrorNotification(false);
@@ -73,69 +74,70 @@ const Ticket = () => {
 
     return (
         <>
-        <div
-            className={cx('container', {
-                ticketHidden: isSubmitted,
-                resultsHidden: !isSubmitted
-            })}
-        >
-            <header className={cx('header')}>Билет 1</header>
-            {isSubmitted ? (
-                <section className={cx('resultContainer')}>
-                    <div className={cx('resultText')}>{resultText}</div>
-                    <div
-                        className={cx('button', 'restartButton')}
-                        onClick={handleRestart}
-                    >
-                        Заново
-                    </div>
-                </section>
-            ) : (
-                <section className={cx('ticket')}>
-                    <div className={cx('topButtons')}>
+            <div
+                className={cx('container', {
+                    ticketHidden: isSubmitted,
+                    resultsHidden: !isSubmitted,
+                })}
+            >
+                <header className={cx('header')}>Билет 1</header>
+                {isSubmitted ? (
+                    <section className={cx('resultContainer')}>
+                        <div className={cx('resultText')}>{resultText}</div>
                         <div
-                            title="Случайно"
-                            className={cx('button', 'icon', 'magicWandButton')}
-                            onClick={handleRandomFill}
-                        />
-                        <div
-                            title="Читерство"
-                            className={cx('button', 'icon', 'cheatButton')}
-                            onClick={handleCheat}
-                        />
-                        <div
-                            title="Заново"
-                            className={cx('button', 'icon', 'resetButton', {
-                                disabled: !isSomeSelected
-                            })}
-                            onClick={handleReset}
-                        />
-                    </div>
-                    <Field
-                        title="Поле 1"
+                            className={cx('button', 'restartButton')}
+                            onClick={handleRestart}
+                        >
+                            Заново
+                        </div>
+                    </section>
+                ) : (
+                    <section className={cx('ticket')}>
+                        <div className={cx('topButtons')}>
+                            <ButtonIcon
+                                title="Случайно"
+                                icon="fillAll"
+                                onClick={handleRandomFill}
+                            />
+                            <ButtonIcon
+                                title="Читерство"
+                                icon="cheat"
+                                onClick={handleCheat}
+                            />
+                            <ButtonIcon
+                                title="Заново"
+                                icon="reset"
+                                onClick={handleCheat}
+                                isDisabled={!isSomeSelected}
+                            />
+                        </div>
+                        <Field
+                            title="Поле 1"
                             numSelect={FIELD_ONE_REQUIRED_COUNT}
-                        numArray={FIELD_ONE_NUMBERS}
-                        selected={selectedFieldOne}
-                        setSelected={setSelectedFieldOne}
-                    />
-                    <Field
-                        title="Поле 2"
+                            numArray={FIELD_ONE_NUMBERS}
+                            selected={selectedFieldOne}
+                            setSelected={setSelectedFieldOne}
+                        />
+                        <Field
+                            title="Поле 2"
                             numSelect={FIELD_TWO_REQUIRED_COUNT}
-                        numArray={[1, 2]}
-                        selected={selectedFieldTwo}
-                        setSelected={setSelectedFieldTwo}
-                    />
-                    <div
-                        className={cx('button', 'resultButton', {
-                            disabled: !isAllSelected
-                        })}
-                        onClick={isAllSelected ? handleCheckResult : () => null}
-                    >
-                        Показать результат
-                    </div>
-                </section>
-            )}
-        </div>
+                            numArray={[1, 2]}
+                            selected={selectedFieldTwo}
+                            setSelected={setSelectedFieldTwo}
+                        />
+                        <div
+                            className={cx('button', 'resultButton', {
+                                disabled: !isAllSelected,
+                            })}
+                            onClick={
+                                isAllSelected ? handleCheckResult : () => null
+                            }
+                        >
+                            Показать результат
+                        </div>
+                    </section>
+                )}
+            </div>
             {showErrorNotification && (
                 <Notification
                     onClick={hideNotification}
