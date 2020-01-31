@@ -1,8 +1,11 @@
 import React from 'react';
+import classNames from 'classnames/bind';
 
 import styles from './Field.module.css';
 import { FieldItem } from '../FieldItem';
 import { inflectFieldNumber } from '../../tools/helpers';
+
+const cx = classNames.bind(styles);
 
 interface FieldProps {
     title: string;
@@ -19,8 +22,10 @@ const Field: React.FC<FieldProps> = ({
     selected,
     setSelected,
 }) => {
+    const isAllSelected = selected.length === numSelect;
+    const leftToSelect = numSelect - selected.length;
     const selectFieldItem = (num: number) => {
-        if (selected.length < numSelect) {
+        if (!isAllSelected) {
             setSelected([...selected, num]);
         }
     };
@@ -28,18 +33,19 @@ const Field: React.FC<FieldProps> = ({
         const copyWithRemovedNum = selected.filter(item => item !== num);
         setSelected(copyWithRemovedNum);
     };
-    const hint = `Отметьте ${selected.length > 0 ? 'еще' : ''} ${numSelect -
-        selected.length} ${inflectFieldNumber(numSelect - selected.length)}`;
+    const hintText = `Отметьте ${
+        selected.length > 0 ? 'еще' : ''
+    } ${leftToSelect} ${inflectFieldNumber(leftToSelect)}`;
 
     return (
-        <div className={styles.container}>
-            <header className={styles.header}>
-                <p className={styles.title}>{title}</p>
-                {selected.length === numSelect ? null : (
-                    <p className={styles.hint}>{hint}</p>
-                )}
+        <article className={cx('container')}>
+            <header className={cx('header')}>
+                <p className={cx('title')}>{title}</p>
+                {!isAllSelected ? (
+                    <p className={cx('hint')}>{hintText}</p>
+                ) : null}
             </header>
-            <div className={styles.field}>
+            <section className={cx('field')}>
                 {numArray.map(num => {
                     const isSelected = selected.includes(num);
                     const onClick = isSelected
@@ -49,13 +55,14 @@ const Field: React.FC<FieldProps> = ({
                         <FieldItem
                             key={num}
                             num={num}
+                            isInactive={!isSelected && isAllSelected}
                             isSelected={isSelected}
                             onClick={onClick}
                         />
                     );
                 })}
-            </div>
-        </div>
+            </section>
+        </article>
     );
 };
 

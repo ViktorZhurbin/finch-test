@@ -2,18 +2,16 @@ import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 
 import styles from './Ticket.module.css';
-
 import { Field } from '../Field';
 import {
     FIELD_ONE_NUMBERS,
     FIELD_ONE_REQUIRED_COUNT,
     FIELD_TWO_REQUIRED_COUNT,
-    WIN_TEXT,
-    LOOSE_TEXT,
 } from '../../const';
 import { getResults, checkResultAndPost } from '../../tools/helpers';
 import { Notification } from '../Notification';
 import { ButtonIcon } from '../ButtonIcon';
+import { Result } from './Result';
 
 const cx = classNames.bind(styles);
 
@@ -24,7 +22,14 @@ const Ticket = () => {
     const [firstField, setFirstField] = useState<number[]>([]);
     const [secondField, setSecondField] = useState<number[]>([]);
 
+    const isAllSelected =
+        firstField.length === FIELD_ONE_REQUIRED_COUNT &&
+        secondField.length === FIELD_TWO_REQUIRED_COUNT;
+    const isSomeSelected = firstField.length || secondField.length;
+
     const handleCheckResult = async () => {
+        if (!isAllSelected) return;
+
         const { isResponseSaved, isTicketWon } = await checkResultAndPost(
             firstField,
             secondField
@@ -49,6 +54,8 @@ const Ticket = () => {
     };
 
     const handleReset = () => {
+        if (!isSomeSelected) return;
+
         setFirstField([]);
         setSecondField([]);
     };
@@ -58,31 +65,12 @@ const Ticket = () => {
         setIsSubmited(false);
     };
 
-    const resultText = isWin ? WIN_TEXT : LOOSE_TEXT;
-    const isAllSelected =
-        firstField.length === FIELD_ONE_REQUIRED_COUNT &&
-        secondField.length === FIELD_TWO_REQUIRED_COUNT;
-    const isSomeSelected = firstField.length || secondField.length;
-
     return (
         <>
-            <div
-                className={cx('container', {
-                    ticketHidden: isSubmitted,
-                    resultsHidden: !isSubmitted,
-                })}
-            >
+            <div className={cx('container', { isSubmitted })}>
                 <header className={cx('header')}>Билет 1</header>
                 {isSubmitted ? (
-                    <section className={cx('resultContainer')}>
-                        <div className={cx('resultText')}>{resultText}</div>
-                        <div
-                            className={cx('button', 'restartButton')}
-                            onClick={handleRestart}
-                        >
-                            Заново
-                        </div>
-                    </section>
+                    <Result handleRestart={handleRestart} isWin={isWin} />
                 ) : (
                     <section className={cx('ticket')}>
                         <div className={cx('topButtons')}>
@@ -116,9 +104,7 @@ const Ticket = () => {
                             className={cx('button', 'resultButton', {
                                 disabled: !isAllSelected,
                             })}
-                            onClick={
-                                isAllSelected ? handleCheckResult : () => null
-                            }
+                            onClick={handleCheckResult}
                         >
                             Показать результат
                         </div>

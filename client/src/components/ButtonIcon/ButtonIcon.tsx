@@ -33,8 +33,9 @@ const ButtonIcon: React.FC<ButtonIconProps> = ({
     return (
         <div
             title={title}
-            className={cx('button', 'icon', { disabled: isDisabled })}
+            className={cx('button', 'icon', { isDisabled })}
             onClick={onClick}
+            role="button"
         >
             <Icon />
         </div>
