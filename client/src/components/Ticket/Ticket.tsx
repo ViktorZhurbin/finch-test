@@ -6,6 +6,7 @@ import styles from "./Ticket.module.css";
 import { Field } from "../Field";
 import { FIELD_ONE_NUMBERS, WIN_TEXT, LOOSE_TEXT } from "../../const";
 import { checkResult, getResults } from "../../helpers";
+import { fetchResponse } from "../../api";
 
 const cx = classNames.bind(styles);
 
@@ -17,14 +18,26 @@ const Ticket = () => {
     const [selectedFieldTwo, setSelectedFieldTwo] = useState<number[]>([]);
 
     const handleCheckResult = () => {
-        const isWinResult = checkResult(
+        const isTicketWon = checkResult(
             selectedFieldOne,
             selectedFieldTwo,
             isCheat
         );
 
-        setIsWin(isWinResult);
-        setIsSubmited(true);
+        const requestBody = {
+            selectedNumber: {
+                firstField: selectedFieldOne,
+                secondField: selectedFieldTwo
+            },
+            isTicketWon
+        };
+
+        const response = fetchResponse(requestBody);
+
+        if (response) {
+            setIsWin(isTicketWon);
+            setIsSubmited(true);
+        }
     };
 
     const handleCheat = () => {
