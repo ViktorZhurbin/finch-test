@@ -11,6 +11,8 @@ export const postResponse = async (requestBody = {}) => {
     }
 };
 
+const waitMs = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
+
 export const postResponseRetry = async (
     requestBody = {},
     retryCount: number = 3
@@ -19,6 +21,7 @@ export const postResponseRetry = async (
         return await postResponse(requestBody);
     } catch (error) {
         if (retryCount === 1) return false;
+        await waitMs(2000);
         return await postResponseRetry(requestBody, retryCount - 1);
     }
 };
