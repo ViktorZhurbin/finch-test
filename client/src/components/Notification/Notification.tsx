@@ -4,7 +4,7 @@ import styles from './Notification.module.css';
 
 const Notification: React.FC<{ text: string; onClick: () => void }> = ({
     text,
-    onClick
+    onClick,
 }) => {
     return (
         <div className={styles.container} onClick={onClick}>

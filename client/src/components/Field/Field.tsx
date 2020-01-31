@@ -17,7 +17,7 @@ const Field: React.FC<FieldProps> = ({
     numSelect,
     numArray,
     selected,
-    setSelected
+    setSelected,
 }) => {
     const selectFieldItem = (num: number) => {
         if (selected.length < numSelect) {

@@ -2,7 +2,7 @@ import {
     getNumArray,
     getRandomNumArray,
     inflectFieldNumber,
-    getCorrectCount
+    getCorrectCount,
 } from './helpers';
 
 describe('#getNumArray', () => {
