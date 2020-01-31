@@ -11,38 +11,36 @@ import {
     WIN_TEXT,
     LOOSE_TEXT,
 } from '../../const';
+import { getResults, checkResultAndPost } from '../../helpers';
+import { Notification } from '../Notification';
 
 const cx = classNames.bind(styles);
 
 const Ticket = () => {
     const [isWin, setIsWin] = useState(false);
     const [isCheat, setIsCheat] = useState(false);
+    const [showErrorNotification, setShowErrorNotification] = useState(false);
     const [isSubmitted, setIsSubmited] = useState(false);
     const [selectedFieldOne, setSelectedFieldOne] = useState<number[]>([]);
     const [selectedFieldTwo, setSelectedFieldTwo] = useState<number[]>([]);
 
-    const handleCheckResult = () => {
-        const isTicketWon = checkResult(
+    const handleCheckResult = async () => {
+        const { isResponseSaved, isTicketWon } = await checkResultAndPost(
             selectedFieldOne,
             selectedFieldTwo,
             isCheat
         );
 
-        const requestBody = {
-            selectedNumber: {
-                firstField: selectedFieldOne,
-                secondField: selectedFieldTwo
-            },
-            isTicketWon
-        };
+        if (!isResponseSaved) {
+            setShowErrorNotification(true);
+            return;
+        }
 
-        const response = fetchResponse(requestBody);
-
-        if (response) {
             setIsWin(isTicketWon);
             setIsSubmited(true);
-        }
     };
+
+    const hideNotification = () => setShowErrorNotification(false);
 
     const handleCheat = () => {
         setIsCheat(true);
@@ -74,6 +72,7 @@ const Ticket = () => {
     const isSomeSelected = selectedFieldOne.length || selectedFieldTwo.length;
 
     return (
+        <>
         <div
             className={cx('container', {
                 ticketHidden: isSubmitted,
@@ -137,6 +136,13 @@ const Ticket = () => {
                 </section>
             )}
         </div>
+            {showErrorNotification && (
+                <Notification
+                    onClick={hideNotification}
+                    text="Не удалось сохранить результат :( "
+                />
+            )}
+        </>
     );
 };
 

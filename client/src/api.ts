@@ -1,4 +1,4 @@
-export const fetchResponse = async (requestBody = {}) => {
+export const postResponse = async (requestBody = {}) => {
     const encodedURI = window.encodeURI('http://localhost:4000/finch-test');
     const response = await fetch(encodedURI, {
         method: 'POST',
@@ -6,5 +6,19 @@ export const fetchResponse = async (requestBody = {}) => {
     });
     const data = await response.json();
 
-    return data && data.body;
+    if (data && data.success) {
+        return true;
+    }
+};
+
+export const postResponseRetry = async (
+    requestBody = {},
+    retryCount: number = 3
+): Promise<boolean | undefined> => {
+    try {
+        return await postResponse(requestBody);
+    } catch (error) {
+        if (retryCount === 1) return false;
+        return await postResponseRetry(requestBody, retryCount - 1);
+    }
 };

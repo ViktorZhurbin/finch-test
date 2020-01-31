@@ -1,3 +1,5 @@
+import { postResponseRetry } from './api';
+
 export const getNumArray = (start: number, end: number) =>
     Array.from(Array(end + 1).keys()).slice(start);
 
@@ -67,4 +69,26 @@ export const checkResult = (
     const correctCountTwo = getCorrectCount(selectedFieldTwo, resultTwo);
 
     return correctCountOne > 3 || (correctCountOne > 2 && correctCountTwo > 0);
+};
+
+export const checkResultAndPost = async (
+    selectedFieldOne: number[],
+    selectedFieldTwo: number[],
+    isCheat?: boolean
+) => {
+    const isTicketWon = checkResult(
+        selectedFieldOne,
+        selectedFieldTwo,
+        isCheat
+    );
+
+    const isResponseSaved = await postResponseRetry({
+        selectedNumber: {
+            firstField: selectedFieldOne,
+            secondField: selectedFieldTwo
+        },
+        isTicketWon
+    });
+
+    return { isResponseSaved, isTicketWon };
 };
