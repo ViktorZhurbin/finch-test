@@ -32,14 +32,15 @@ const Ticket = () => {
 
         if (!isResponseSaved) {
             setShowErrorNotification(true);
+            setTimeout(() => {
+                setShowErrorNotification(false);
+            }, 4000);
             return;
         }
 
         setIsWin(isTicketWon);
         setIsSubmited(true);
     };
-
-    const hideNotification = () => setShowErrorNotification(false);
 
     const handleRandomFill = () => {
         const [resultOne, resultTwo] = getResults();
@@ -125,10 +126,7 @@ const Ticket = () => {
                 )}
             </div>
             {showErrorNotification && (
-                <Notification
-                    onClick={hideNotification}
-                    text="Не удалось сохранить результат :( "
-                />
+                <Notification text="Не удалось сохранить результат :( " />
             )}
         </>
     );
