@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Field.module.css';
 import { FieldItem } from '../FieldItem';
-import { inflectFieldNumber } from '../../helpers';
+import { inflectFieldNumber } from '../../tools/helpers';
 
 interface FieldProps {
     title: string;

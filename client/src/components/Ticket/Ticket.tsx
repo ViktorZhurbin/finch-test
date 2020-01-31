@@ -11,7 +11,7 @@ import {
     WIN_TEXT,
     LOOSE_TEXT,
 } from '../../const';
-import { getResults, checkResultAndPost } from '../../helpers';
+import { getResults, checkResultAndPost } from '../../tools/helpers';
 import { Notification } from '../Notification';
 import { ButtonIcon } from '../ButtonIcon';
 
