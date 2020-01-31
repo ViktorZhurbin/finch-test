@@ -55,39 +55,26 @@ export const getResults = (): [number[], number[]] => {
     return [resultOne, resultTwo];
 };
 
-export const checkResult = (
-    selectedFieldOne: number[],
-    selectedFieldTwo: number[],
-    isCheat?: boolean
-) => {
-    if (isCheat) {
-        return true;
-    }
-
+export const checkResult = (firstField: number[], secondField: number[]) => {
     const [resultOne, resultTwo] = getResults();
-    const correctCountOne = getCorrectCount(selectedFieldOne, resultOne);
-    const correctCountTwo = getCorrectCount(selectedFieldTwo, resultTwo);
+    const correctCountOne = getCorrectCount(firstField, resultOne);
+    const correctCountTwo = getCorrectCount(secondField, resultTwo);
 
     return correctCountOne > 3 || (correctCountOne > 2 && correctCountTwo > 0);
 };
 
 export const checkResultAndPost = async (
-    selectedFieldOne: number[],
-    selectedFieldTwo: number[],
-    isCheat?: boolean
+    firstField: number[],
+    secondField: number[]
 ) => {
-    const isTicketWon = checkResult(
-        selectedFieldOne,
-        selectedFieldTwo,
-        isCheat
-    );
+    const isTicketWon = checkResult(firstField, secondField);
 
     const isResponseSaved = await postResponseRetry({
         selectedNumber: {
-            firstField: selectedFieldOne,
-            secondField: selectedFieldTwo
+            firstField,
+            secondField,
         },
-        isTicketWon
+        isTicketWon,
     });
 
     return { isResponseSaved, isTicketWon };

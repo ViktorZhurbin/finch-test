@@ -19,17 +19,15 @@ const cx = classNames.bind(styles);
 
 const Ticket = () => {
     const [isWin, setIsWin] = useState(false);
-    const [isCheat, setIsCheat] = useState(false);
     const [showErrorNotification, setShowErrorNotification] = useState(false);
     const [isSubmitted, setIsSubmited] = useState(false);
-    const [selectedFieldOne, setSelectedFieldOne] = useState<number[]>([]);
-    const [selectedFieldTwo, setSelectedFieldTwo] = useState<number[]>([]);
+    const [firstField, setFirstField] = useState<number[]>([]);
+    const [secondField, setSecondField] = useState<number[]>([]);
 
     const handleCheckResult = async () => {
         const { isResponseSaved, isTicketWon } = await checkResultAndPost(
-            selectedFieldOne,
-            selectedFieldTwo,
-            isCheat
+            firstField,
+            secondField
         );
 
         if (!isResponseSaved) {
@@ -43,22 +41,15 @@ const Ticket = () => {
 
     const hideNotification = () => setShowErrorNotification(false);
 
-    const handleCheat = () => {
-        setIsCheat(true);
-        const [resultOne, resultTwo] = getResults();
-        setSelectedFieldOne(resultOne);
-        setSelectedFieldTwo(resultTwo);
-    };
-
     const handleRandomFill = () => {
         const [resultOne, resultTwo] = getResults();
-        setSelectedFieldOne(resultOne);
-        setSelectedFieldTwo(resultTwo);
+        setFirstField(resultOne);
+        setSecondField(resultTwo);
     };
 
     const handleReset = () => {
-        setSelectedFieldOne([]);
-        setSelectedFieldTwo([]);
+        setFirstField([]);
+        setSecondField([]);
     };
 
     const handleRestart = () => {
@@ -68,9 +59,9 @@ const Ticket = () => {
 
     const resultText = isWin ? WIN_TEXT : LOOSE_TEXT;
     const isAllSelected =
-        selectedFieldOne.length === FIELD_ONE_REQUIRED_COUNT &&
-        selectedFieldTwo.length === FIELD_TWO_REQUIRED_COUNT;
-    const isSomeSelected = selectedFieldOne.length || selectedFieldTwo.length;
+        firstField.length === FIELD_ONE_REQUIRED_COUNT &&
+        secondField.length === FIELD_TWO_REQUIRED_COUNT;
+    const isSomeSelected = firstField.length || secondField.length;
 
     return (
         <>
@@ -100,14 +91,9 @@ const Ticket = () => {
                                 onClick={handleRandomFill}
                             />
                             <ButtonIcon
-                                title="Читерство"
-                                icon="cheat"
-                                onClick={handleCheat}
-                            />
-                            <ButtonIcon
                                 title="Заново"
                                 icon="reset"
-                                onClick={handleCheat}
+                                onClick={handleReset}
                                 isDisabled={!isSomeSelected}
                             />
                         </div>
@@ -115,15 +101,15 @@ const Ticket = () => {
                             title="Поле 1"
                             numSelect={FIELD_ONE_REQUIRED_COUNT}
                             numArray={FIELD_ONE_NUMBERS}
-                            selected={selectedFieldOne}
-                            setSelected={setSelectedFieldOne}
+                            selected={firstField}
+                            setSelected={setFirstField}
                         />
                         <Field
                             title="Поле 2"
                             numSelect={FIELD_TWO_REQUIRED_COUNT}
                             numArray={[1, 2]}
-                            selected={selectedFieldTwo}
-                            setSelected={setSelectedFieldTwo}
+                            selected={secondField}
+                            setSelected={setSecondField}
                         />
                         <div
                             className={cx('button', 'resultButton', {
