@@ -4,4 +4,4 @@
 
 - `yarn` из корня проекта
 - `cd client` & `yarn`
-- `yarn dev`yarn
+- `yarn dev`
