@@ -1,5 +1,5 @@
 export const postResponse = async (requestBody = {}) => {
-    const encodedURI = window.encodeURI('/finch-test');
+    const encodedURI = window.encodeURI('/api/finch-test');
     const response = await fetch(encodedURI, {
         method: 'POST',
         body: JSON.stringify(requestBody),

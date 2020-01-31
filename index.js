@@ -1,18 +1,19 @@
+const path = require('path');
 const express = require('express');
 
 const app = express();
 
-app.post('/finch-test', (req, res) => {
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+app.post('/api/finch-test', (req, res) => {
     res.send({ success: true });
 });
 
-const port = 4000;
-const server = app.listen(port, () =>
-    console.log(`App ready on port ${port}!`)
-);
-
-process.on('exit', () => {
-    server.close(() => {
-        console.log('Process terminated');
-    });
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname + '/client/build/index.html'));
 });
+
+const port = process.env.PORT || 5000;
+app.listen(port);
+
+console.log(`App ready on port ${port}!`);
