@@ -1,8 +1,8 @@
-const express = require("express");
+const express = require('express');
 
 const app = express();
 
-app.post("/finch-test", (req, res) => {
+app.post('/finch-test', (req, res) => {
     res.send({ success: true });
 });
 
@@ -11,8 +11,8 @@ const server = app.listen(port, () =>
     console.log(`App ready on port ${port}!`)
 );
 
-process.on("SIGTERM", () => {
+process.on('exit', () => {
     server.close(() => {
-        console.log("Process terminated");
+        console.log('Process terminated');
     });
 });
