@@ -22,15 +22,10 @@ const Ticket = () => {
     const [firstField, setFirstField] = useState<number[]>([]);
     const [secondField, setSecondField] = useState<number[]>([]);
 
-    console.log(typeof secondField);
-    console.log(typeof setSecondField);
-
     const isAllSelected =
         firstField.length === FIELD_ONE_REQUIRED_COUNT &&
         secondField.length === FIELD_TWO_REQUIRED_COUNT;
     const isSomeSelected = firstField.length || secondField.length;
-
-    console.log(typeof isSomeSelected);
 
     const handleCheckResult = async () => {
         if (!isAllSelected) return;
@@ -51,13 +46,6 @@ const Ticket = () => {
         setIsWin(isTicketWon);
         setIsSubmited(true);
     };
-
-    console.log(typeof handleCheckResult);
-    console.log(
-        typeof setTimeout(() => {
-            setShowErrorNotification(false);
-        }, 4000)
-    );
 
     const handleRandomFill = () => {
         const [resultOne, resultTwo] = getResults();
@@ -129,7 +117,5 @@ const Ticket = () => {
         </>
     );
 };
-
-console.log(typeof Ticket);
 
 export { Ticket };
