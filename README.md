@@ -1,5 +1,5 @@
-Чтобы развернуть локально:
+Демо - https://finch-test.herokuapp.com/
 
-- `yarn` из корня проекта
-- `cd client` & `yarn`
-- `yarn dev`
+Развернуть локально:
+
+- `yarn` && `yarn dev`
